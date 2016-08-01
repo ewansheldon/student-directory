@@ -1,5 +1,4 @@
 students = [
-   "-------------",
    "Dr. Hannibal Lecter",
    "Darth Vader",
    "Nurse Ratched",
