@@ -8,7 +8,7 @@ def input_students
 
   while !name.empty? do
     students << {name: name, cohort: :november}
-    puts "No we have #{students.count} students"
+    puts "Now we have #{students.count} students"
     name = gets.chomp
   end
 
@@ -29,7 +29,15 @@ end
 def print_students_starting_with(students, letter)
   students.each do |student|
     if student[:name].downcase.start_with?(letter)
-    puts "#{students.index(student) + 1}. #{student[:name]}, (#{student[:cohort]} cohort)"
+    puts "#{student[:name]}, (#{student[:cohort]} cohort)"
+    end
+  end
+end
+
+def only_students_with_names_shorter_than (students, characters)
+  students.each do |student|
+    if student[:name].length < characters
+    puts "#{student[:name]}, (#{student[:cohort]} cohort)"
     end
   end
 end
