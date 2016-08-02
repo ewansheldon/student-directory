@@ -19,7 +19,7 @@ def input_students
     if cohort.empty?
       cohort = :november
     else
-      cohort = cohort.to_sym
+      cohort = cohort.downcase.to_sym
     end
 
     if hobbies.empty?
@@ -41,7 +41,11 @@ def input_students
     end
 
     students << {name: name, cohort: cohort, hobbies: hobbies, country_of_origin: country_of_origin, height: height}
+    if students.count == 1
+    puts "Now we have #{students.count} student"
+    else
     puts "Now we have #{students.count} students"
+    end
     name = gets.chomp
   end
 
@@ -77,7 +81,25 @@ def only_students_with_names_shorter_than (students, characters)
   end
 end
 
+def print_by_cohort
+  cohorts = []
+  students.each do |student|
+    cohorts << student[:cohort].to_s
+  end
+  # cohorts.uniq bit
+  puts "Which cohort of students would you like to see?"
+  puts "The options are:"
+  puts cohorts
+  requested_cohort = gets.chomp
+  students.each do |student|
+    if student[:cohort].to_s == requested_cohort.downcase
+      puts "#{student[:name]}"
+    end
+  end
+end
+
 def print_footer(students)
+  puts "Overall, we have #{students.count} great student" if students.count == 1
   puts "Overall, we have #{students.count} great students"
 end
 
