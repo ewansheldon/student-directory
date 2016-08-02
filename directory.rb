@@ -4,17 +4,17 @@ def input_students
 
   students = []
 
-  name = gets.chomp
+  name = gets.strip
 
   while !name.empty? do
     puts "Please enter the cohort of the student"
-    cohort = gets.chomp
+    cohort = gets.strip
     puts "Please enter any hobbies of the student (separated by a comma)"
-    hobbies = gets.chomp
+    hobbies = gets.strip
     puts "Please enter the country of birth of the student"
-    country_of_origin = gets.chomp
+    country_of_origin = gets.strip
     puts "Please enter the height of the student in centimetres"
-    height = gets.chomp
+    height = gets.strip
 
     if cohort.empty?
       cohort = :november
@@ -46,7 +46,7 @@ def input_students
     else
     puts "Now we have #{students.count} students"
     end
-    name = gets.chomp
+    name = gets.strip
   end
 
   students
@@ -90,7 +90,7 @@ def print_by_cohort
   puts "Which cohort of students would you like to see?"
   puts "The options are:"
   puts cohorts
-  requested_cohort = gets.chomp
+  requested_cohort = gets.strip
   students.each do |student|
     if student[:cohort].to_s == requested_cohort.downcase
       puts "#{student[:name]}".center(50)
