@@ -53,14 +53,14 @@ def input_students
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(50) #depends on width of output space
+  puts "-------------".center(50)
 end
 
 def print(students)
   current_index = 0
   while students[current_index] != nil
-    puts "#{current_index + 1}. #{students[current_index][:name]}, (#{students[current_index][:cohort]})"
+    puts "#{current_index + 1}. #{students[current_index][:name]}, (#{students[current_index][:cohort]})".center(50)
     current_index +=1
   end
 end
@@ -68,7 +68,7 @@ end
 def print_students_starting_with(students, letter)
   students.each do |student|
     if student[:name].downcase.start_with?(letter)
-    puts "#{student[:name]}, (#{student[:cohort]} cohort)"
+    puts "#{student[:name]}, (#{student[:cohort]} cohort)".center(50)
     end
   end
 end
@@ -76,7 +76,7 @@ end
 def only_students_with_names_shorter_than (students, characters)
   students.each do |student|
     if student[:name].length < characters
-    puts "#{student[:name]}, (#{student[:cohort]} cohort)"
+    puts "#{student[:name]}, (#{student[:cohort]} cohort)".center(50)
     end
   end
 end
@@ -93,14 +93,14 @@ def print_by_cohort
   requested_cohort = gets.chomp
   students.each do |student|
     if student[:cohort].to_s == requested_cohort.downcase
-      puts "#{student[:name]}"
+      puts "#{student[:name]}".center(50)
     end
   end
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great student" if students.count == 1
-  puts "Overall, we have #{students.count} great students"
+  puts "Overall, we have #{students.count} great student".center(50) if students.count == 1
+  puts "Overall, we have #{students.count} great students".center(50)
 end
 
 students = input_students
