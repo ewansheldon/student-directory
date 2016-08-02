@@ -58,6 +58,9 @@ def print_header
 end
 
 def print(students)
+  if students.count == 0
+    puts "There are currently no students enlisted at Villains Academy"
+  end
   current_index = 0
   while students[current_index] != nil
     puts "#{current_index + 1}. #{students[current_index][:name]}, (#{students[current_index][:cohort]})".center(50)
