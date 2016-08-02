@@ -7,12 +7,17 @@ def input_students
   name = gets.chomp
 
   while !name.empty? do
+    puts "Please enter the cohort of the student"
+    cohort = gets.chomp
     puts "Please enter any hobbies of the student (separated by a comma)"
     hobbies = gets.chomp
     puts "Please enter the country of birth of the student"
     country_of_origin = gets.chomp
     puts "Please enter the height of the student in centimetres"
     height = gets.chomp
+    if cohort.empty?
+      cohort = "November"
+    end
     if hobbies.empty?
       hobbies = "unknown"
     end
@@ -22,7 +27,7 @@ def input_students
     if height.empty?
       height = "unknown"
     end
-    students << {name: name, cohort: :november, hobbies: hobbies, country_of_origin: country_of_origin, height: height}
+    students << {name: name, cohort: cohort, hobbies: hobbies, country_of_origin: country_of_origin, height: height}
     puts "Now we have #{students.count} students"
     name = gets.chomp
   end
