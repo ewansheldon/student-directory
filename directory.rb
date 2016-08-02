@@ -15,18 +15,31 @@ def input_students
     country_of_origin = gets.chomp
     puts "Please enter the height of the student in centimetres"
     height = gets.chomp
+
     if cohort.empty?
-      cohort = "November"
+      cohort = :november
+    else
+      cohort = cohort.to_sym
     end
+
     if hobbies.empty?
-      hobbies = "unknown"
+      hobbies = :unknown
+    else
+      hobbies = hobbies.to_sym
     end
+
     if country_of_origin.empty?
-      country_of_origin = "unknown"
+      country_of_origin = :unknown
+    else
+      country_of_origin = country_of_origin.to_sym
     end
+
     if height.empty?
-      height = "unknown"
+      height = :unknown
+    else
+      height = height.to_sym
     end
+
     students << {name: name, cohort: cohort, hobbies: hobbies, country_of_origin: country_of_origin, height: height}
     puts "Now we have #{students.count} students"
     name = gets.chomp
