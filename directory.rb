@@ -86,7 +86,7 @@ def print_by_cohort
   students.each do |student|
     cohorts << student[:cohort].to_s
   end
-  # cohorts.uniq bit
+  cohorts = cohorts.uniq
   puts "Which cohort of students would you like to see?"
   puts "The options are:"
   puts cohorts
