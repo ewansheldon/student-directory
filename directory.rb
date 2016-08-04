@@ -1,16 +1,15 @@
-students = []
+@students = []
 
 def interactive_menu
-  students = []
   loop do
   print_menu
   selection = gets.chomp
 
   case selection
     when "1"
-      students = input_students
+      input_students
     when "2"
-      show_students(students)
+      show_students
     when "9"
       exit
     else
@@ -26,17 +25,15 @@ def print_menu
   puts "9. Exit"
 end
 
-def show_students(students)
+def show_students
   print_header
-  printout(students)
-  print_footer(students)
+  printout
+  print_footer
 end
 
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-
-  students = []
 
   name = gets.strip
 
@@ -74,16 +71,14 @@ def input_students
       height = height.to_sym
     end
 
-    students << {name: name, cohort: cohort, hobbies: hobbies, country_of_origin: country_of_origin, height: height}
-    if students.count == 1
-    puts "Now we have #{students.count} student"
+    @students << {name: name, cohort: cohort, hobbies: hobbies, country_of_origin: country_of_origin, height: height}
+    if @students.count == 1
+    puts "Now we have #{@students.count} student"
     else
-    puts "Now we have #{students.count} students"
+    puts "Now we have #{@students.count} students"
     end
     name = gets.strip
   end
-
-  students
 end
 
 def print_header
@@ -91,25 +86,22 @@ def print_header
   puts "-------------".center(50)
 end
 
-def printout(students)
-  if students.length == 0
-    puts "There are currently no students enlisted at Villains Academy"
-  end
-  students.each do |student|
-    puts "#{students.index(student) + 1}. #{student[:name]}, (#{student[:cohort]})"
+def printout
+  @students.each do |student|
+    puts "#{@students.index(student) + 1}. #{student[:name]}, (#{student[:cohort]})"
   end
 end
 
-def print_students_starting_with(students, letter)
-  students.each do |student|
+def print_students_starting_with(letter)
+  @students.each do |student|
     if student[:name].downcase.start_with?(letter)
     puts "#{student[:name]}, (#{student[:cohort]} cohort)".center(50)
     end
   end
 end
 
-def only_students_with_names_shorter_than (students, characters)
-  students.each do |student|
+def only_students_with_names_shorter_than (characters)
+  @students.each do |student|
     if student[:name].length < characters
     puts "#{student[:name]}, (#{student[:cohort]} cohort)".center(50)
     end
@@ -118,7 +110,7 @@ end
 
 def print_by_cohort
   cohorts = []
-  students.each do |student|
+  @students.each do |student|
     cohorts << student[:cohort].to_s
   end
   cohorts = cohorts.uniq
@@ -126,20 +118,19 @@ def print_by_cohort
   puts "The options are:"
   puts cohorts
   requested_cohort = gets.strip
-  students.each do |student|
+  @students.each do |student|
     if student[:cohort].to_s == requested_cohort.downcase
       puts "#{student[:name]}".center(50)
     end
   end
 end
 
-def print_footer(students)
-  if students.count == 0
+def print_footer
+  if @students.count == 0
     puts ""
-  end
-  if students.count == 1
-  puts "Overall, we have #{students.count} great student".center(50)
+  elsif @students.count == 1
+  puts "Overall, we have #{@students.count} great student".center(50)
   else
-  puts "Overall, we have #{students.count} great students".center(50)
+  puts "Overall, we have #{@students.count} great students".center(50)
   end
 end
