@@ -3,18 +3,20 @@
 def interactive_menu
   loop do
   print_menu
-  selection = gets.chomp
+  process(gets.chomp)
+  end
+end
 
+def process(selection)
   case selection
-    when "1"
-      input_students
-    when "2"
-      show_students
-    when "9"
-      exit
-    else
-      puts "I'm not sure which option you wanted! - please try again"
-    end
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "9"
+    exit
+  else
+    puts "I'm not sure which option you wanted! - please try again"
   end
 end
 
@@ -27,7 +29,7 @@ end
 
 def show_students
   print_header
-  printout
+  print_students_list
   print_footer
 end
 
@@ -86,7 +88,7 @@ def print_header
   puts "-------------".center(50)
 end
 
-def printout
+def print_students_list
   @students.each do |student|
     puts "#{@students.index(student) + 1}. #{student[:name]}, (#{student[:cohort]})"
   end
