@@ -52,10 +52,10 @@ def input_students
     if cohort.empty?
       cohort = :november
     else
-      cohort = cohort.downcase.to_sym
+      cohort = cohort.downcase
     end
 
-    @students << {name: name, cohort: cohort}
+    add_students_to_array(name, cohort)
     if @students.count == 1
     puts "Now we have #{@students.count} student - please enter another"
     else
@@ -101,21 +101,26 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    add_students_to_array(name, cohort)
   end
   file.close
 end
 
 def try_load_students
   filename = ARGV.first
-  return if filename.nil?
-  if File.exists?(filename)
+  if filename.nil?
+    load_students
+  elsif File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist"
     exit
   end
+end
+
+def add_students_to_array(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 try_load_students
