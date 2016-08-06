@@ -16,7 +16,9 @@ def process(selection)
   when "3"
     save_students
   when "4"
-    load_students
+    puts "Please enter the name of the file that you'd like to load"
+    filename = gets.chomp
+    load_students(filename)
   when "9"
     exit
   else
@@ -28,8 +30,8 @@ def print_menu
   puts "Please select from the following menu options by entering the given number"
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the current list of students"
+  puts "4. Load a previously saved list of students"
   puts "9. Exit"
 end
 
@@ -88,13 +90,16 @@ def print_footer
 end
 
 def save_students
-  file = File.open("students.csv", "w")
+  puts "What would you like to call this file?"
+  filename = gets.chomp
+  file = File.open(filename, "w")
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
   file.close
+  puts "\n Student list successfully saved \n\n"
 end
 
 def load_students(filename = "students.csv")
@@ -104,6 +109,7 @@ def load_students(filename = "students.csv")
     add_students_to_array(name, cohort)
   end
   file.close
+  puts "\nLoaded #{@students.count} students from #{filename}\n\n"
 end
 
 def try_load_students
@@ -112,7 +118,6 @@ def try_load_students
     load_students
   elsif File.exists?(filename)
     load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist"
     exit
