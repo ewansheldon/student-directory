@@ -19,6 +19,8 @@ def process(selection)
     puts "Please enter the name of the file that you'd like to load"
     filename = gets.chomp
     load_students(filename)
+  when "5"
+    print_source_code
   when "9"
     exit
   else
@@ -32,6 +34,7 @@ def print_menu
   puts "2. Show the students"
   puts "3. Save the current list of students"
   puts "4. Load a previously saved list of students"
+  puts "5. Print source code"
   puts "9. Exit"
 end
 
@@ -89,7 +92,7 @@ def print_footer
   end
 end
 
-def save_students_block
+def save_students
   puts "What would you like to call this file?"
   filename = gets.chomp
   File.open(filename, "w") do |file|
@@ -126,6 +129,10 @@ end
 
 def add_students_to_array(name, cohort)
   @students << {name: name, cohort: cohort.to_sym}
+end
+
+def print_source_code
+  puts "\nCurrent file: #{__FILE__}\n\n"
 end
 
 try_load_students
