@@ -89,26 +89,26 @@ def print_footer
   end
 end
 
-def save_students
+def save_students_block
   puts "What would you like to call this file?"
   filename = gets.chomp
-  file = File.open(filename, "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  File.open(filename, "w") do |file|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
   puts "\n Student list successfully saved \n\n"
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    add_students_to_array(name, cohort)
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(',')
+      add_students_to_array(name, cohort)
+    end
   end
-  file.close
   puts "\nLoaded #{@students.count} students from #{filename}\n\n"
 end
 
